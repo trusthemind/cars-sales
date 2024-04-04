@@ -1,11 +1,21 @@
-const express = require('express');
-const dotenv = require('dotenv').config();
-const app = express();
+import express from "express";
+import { config } from "dotenv";
+import { Connect } from "./src/initializers/connect";
+config();
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+const init = () => {
+    Connect();
+};
+
+init();
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.get("/", (req, res) => {
+    res.send("Express + TypeScript Server");
 });
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server started on port ${process.env.PORT}`);
+app.listen(port, () => {
+    console.log(`[server]: Server is running at http://localhost:${port}`);
 });
